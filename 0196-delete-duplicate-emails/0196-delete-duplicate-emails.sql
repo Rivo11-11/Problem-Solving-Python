@@ -1,7 +1,3 @@
-/* Write your T-SQL query statement below */
-WITH ranked_table AS (
-    SELECT *,
-           ROW_NUMBER() OVER (PARTITION BY email ORDER BY id) AS ranking
-   FROM Person
-)
-DELETE FROM ranked_table WHERE ranking > 1;
+# Write your MySQL query statement below
+delete p1 from person p1,person p2 
+where p1.email=p2.email and p1.id>p2.id;

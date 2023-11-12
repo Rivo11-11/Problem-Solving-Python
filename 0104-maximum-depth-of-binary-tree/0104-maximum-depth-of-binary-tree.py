@@ -12,31 +12,29 @@ class Solution(object):
         :rtype: int
         """
         # DFS
-        # def FindMaxD(root,count) :
-        #     if not root :
-        #         return 0
-        #     if not (root.right or root.left) :
-        #         return 1
-        #     count =1
-        #     count += max(FindMaxD(root.left,count ),FindMaxD(root.right,count ))
-        #     return count
-        # return FindMaxD(root,0)
+        def FindMaxD(root) :
+            if not root :
+                return 0
+            if not root.right and not root.left :
+                return 1
+            return 1 + max(FindMaxD(root.left ),FindMaxD(root.right))
+        return FindMaxD(root)
         ## BFS
-        queue = deque() 
-        if not root :
-            return 0
-        queue.append(root)
-        level = 0
-        while queue :
-            ## take a snapshot from the queue
-            for i in range(len(queue)) :
-                node = queue.popleft()
-                if node.left :
-                 queue.append(node.left)
-                if node.right :
-                 queue.append(node.right)
-            level+=1
-        return level 
+        # queue = deque() 
+        # if not root :
+        #     return 0
+        # queue.append(root)
+        # level = 0
+        # while queue :
+        #     ## take a snapshot from the queue
+        #     for i in range(len(queue)) :
+        #         node = queue.popleft()
+        #         if node.left :
+        #          queue.append(node.left)
+        #         if node.right :
+        #          queue.append(node.right)
+        #     level+=1
+        # return level 
 
                 
 

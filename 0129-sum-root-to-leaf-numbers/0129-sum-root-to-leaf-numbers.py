@@ -18,8 +18,8 @@ class Solution(object):
                 temp += str(root.val)
                 res[0] += int(temp)
                 return
-            dfs(root.left, temp + str(root.val)) 
-            dfs(root.right,temp + str(root.val)) 
-            
+            temp += str(root.val)
+            dfs(root.left, temp) 
+            dfs(root.right,temp)   
         dfs(root,"")
         return res[0]

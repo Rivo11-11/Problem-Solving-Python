@@ -4,20 +4,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        l , r  = 0 , len(nums) - 1
-        result = float("inf")
-        while l <= r :
-            mid = l + (r-l) // 2
-            ## related to the left sorted  ?
-            if nums[mid] >= nums[l] :
-                result = min(result,nums[l]) 
-                l = mid + 1
-            ## related to the right sorted ?
+        n = len(nums) 
+        l,r = 0,n-1
+        mini = float('inf')
+        while l <= r : 
+            mid = (l + r) // 2 
+            if nums[l] <= nums[mid] :
+                mini = min(nums[l],mini) 
+                l = mid + 1 
             else :
-                result = min(result,nums[mid]) 
-                r = mid - 1
-        return result
-
-
-
-        
+                mini = min(nums[mid],mini)
+                r = mid - 1    
+        return mini        

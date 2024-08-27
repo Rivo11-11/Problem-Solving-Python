@@ -5,15 +5,22 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-        count = Counter(nums) 
-        number  = max(count.values())
-        buckets = [[] for i in range(number)]
-        for num in set(nums) :
-            buckets[count[num] -1 ].append(num)
+        n = len(nums)
+        mymap = defaultdict(int)
+        maxi = 0
+        for i in range(n) :
+            mymap[nums[i]] += 1
+            maxi = max(maxi,mymap[nums[i]])
+        new_map =defaultdict(list)
+        for key,v in mymap.items() :
+            new_map[v].append(key)
         res = []
-        for bucket in reversed(buckets) :
-            if k == 0 :
-                break
-            res.extend(bucket)
-            k-= len(bucket)
+        # print(new_map)
+        for i in reversed(range(1,maxi+1)) :
+            if k :
+                res.extend(new_map[i])
+                k-=len(new_map[i])
+            else :
+                break 
         return res
+

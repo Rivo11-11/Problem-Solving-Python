@@ -4,44 +4,58 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from collections import deque
 class Solution(object):
     def diameterOfBinaryTree(self, root):
         """
         :type root: TreeNode
         :rtype: int
         """
-        ## DFS 
-        ## 1 Brute Force o(n^2)
-        if not root  or not (root.left or root.right):
-            return 0
-        diameter = 0
-        def findDiameter(root,count) :
+        self.res = 0 
+        def dfs(root) :
             if not root :
-                return 0
-            if  not (root.left or root.right) :
-                return 1
-            count = 1
-            count += max(findDiameter(root.left,count),findDiameter(root.right,count))  
-            return count
-        queue = deque()
-        queue.append(root)
-        max_root = float("-inf")
-        while queue :
-            print(len(queue))
-            for i in range(len(queue)) :
-                node = queue.popleft()
-                if node :
-                    max_root = max(max_root,findDiameter(node.left,diameter) +  findDiameter(node.right,diameter))
-                    queue.append(node.left)
-                    queue.append(node.right)
+                return 0 
+            l,r = dfs(root.left) , dfs(root.right) 
+            self.res = max(self.res,l+r)
+            return max(l,r) + 1
+        dfs(root)
+        return self.res
 
-        return max_root
 
-        ## Optimized o(n)
+
+
+        # res = [float('-inf')]
+
+        # ## o(n^2)
+        # def findDiameter(root) :
+        #     if root :
+        #         k = 0
+        #         if root.left :
+        #             k += 1
+        #         if root.right :
+        #             k   +=1
+        #         temp = height(root.left,0) + height(root.right,0)+ k
+        #         res[0] = max(res[0],temp)
+        #         findDiameter(root.left)
+        #         findDiameter(root.right)
         
-
+        # ## o(n)
+        # ## top down 
+        # def height(root,count) :
+        #     if not root :
+        #         return count
+        #     return  max(height(root.left,count+1),height(root.right,count+1))
         
+        # ## bottom up
+        # def height2(root) :
+        #     if not root : 
+        #         return 0 
+        #     left = height2(root.left)
+        #     right = height2(root.right) 
+        #     return max(left,right) + 1
 
+        # findDiameter(root)
+        # print(height(root,0)) 
+        # print(height2(root))
+        # return res[0]
 
-        
+       

@@ -10,35 +10,23 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-        def bfs(root):
-
-            if not root:
-                return
-    
-            queue = [[root,0]]
-            res = [(root.val,0)]
-            result = [root.val]
-
-            while queue:
-                temp = queue.pop(0)
-                node = temp[0]
-                level = temp[1]
+        if not root :
+            return []
+        queue = deque()
+        queue.append(root)
+        res = []
+        while queue :
+            n = len(queue)
+            for i in range(n) :
+                node = queue.popleft() 
                 if node.left :
-                    if res[-1][1] == level + 1 :
-                        res.pop() 
-                        result.pop()
-                    res.append((node.left.val,level + 1))
-                    result.append(node.left.val)
-                    queue.append([node.left,level + 1])
-                if node.right:
-                    if res[-1][1] == level + 1 :
-                        res.pop() 
-                        result.pop()
-                    res.append((node.right.val,level + 1))
-                    result.append(node.right.val)
-                    queue.append([node.right,level + 1])
-            return result
-        return bfs(root)
+                    queue.append(node.left) 
+                if node.right :
+                    queue.append(node.right) 
+                if i == n-1 :
+                    res.append(node.val) 
+        return res
+            
 
     
 

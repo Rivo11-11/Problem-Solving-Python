@@ -19,8 +19,6 @@ class Solution(object):
         
         s,n1 = convert(start)
         g,n2 = convert(goal)
-        print(s)
-        print(g)
         count = 0
         i,j = 0,0 
         while i < n1 or j < n2 :
